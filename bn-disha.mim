@@ -137,51 +137,34 @@
 
 (state
   (init
-    (consonant
+    (dependent
       (set c @-1)
 	(cond
-	    (| (< c 0x0999) (> c 0x999)
+	    ((| (< c 0x0999) (> c 0x999))
 	      (cond
-	        (| (< c 0x099E) (> c 0x099E)
+	        ((| (< c 0x099E) (> c 0x099E))
 		  (cond
 	            ((< c 0x09CE)
 			(cond
 	  		  ((= @-2 0x09BF)				;ি
 				(delete @<)
-				0x09BF
+				
 				(insert c)))
 			(cond
 			  ((= @-2 0x09C7)				;ে
 				(delete @<)
 				0x09C7
-				(insert c))
+				(insert c)))
 			(cond
 			  ((= @-2 0x09C8)				;ৈ
 				(delete @<)
 				0x09C8)
 				(insert c))
 			(cond
-			  ((= @-1 0x09BE)				;া
-				(insert c)
-				0x09BE)
-			(cond
 			  ((= @-1 0x09D7)				;Au-kar
 				(insert c)
-				0x09D7)
-			(cond
-			  (& (> @-1 0x09BF) (< @-1 0x09C4)		;ী, ু, ূ,ৃ
-				(set sc @-1)
-				(insert c)
-				(insert sc))
-			(cond
-			  ((= @-1 0x09CD)				;্
-				(insert c)
-				0x09CD)
-			(cond
-			  ((& (> @-1 0x0980)(< @-1 0x0984))		;ঁ, ং, ঃ
-				(set sc @-1)
-				(insert c)
-				(insert sc))))))))
+				0x09D7))
+		))))))
 	(commit))
   (numpad
    (commit))
@@ -191,7 +174,10 @@
    (commit))
   (independent
    (commit))
-  (dependent)
-  (nil
-   (unhandle))
-)
+  (consonant
+     (commit))
+))
+;; Local Variables:
+;; coding: utf-8
+;; mode: emacs-lisp
+;; End:
