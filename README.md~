@@ -7,10 +7,3 @@ The popular keyboard layouts in use for Indic scripts such as Bengali follow a n
 The non-visual style follows a uniform method of typing the characters as per their type (consonants, independent vowels, dependent vowels, special characters, conjunct characters) and are defined by specific rules.
 This method of writing is already prevalent.However, this often poses a learning challenge for new users who are more practised in the conventional visual writing method. 
 This project aims to create a Visual typing method for complex scripts like Bengali.
-
-File Description:
-=================
-
-bn-disha.mim: Logical implementation for the Visual Based Input System. This file needs a few more corrections to work with join pre-base matras and consonants in a visual way.
-
-bn-disha-dev.mim: Combination mapping based alternate implementation for the Visual Based Input System. This is a functionally complete implementation of the required system. 
