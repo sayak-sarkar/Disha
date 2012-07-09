@@ -1,4 +1,4 @@
-(input-method bn disha-dev (version "0.0.3"))
+(input-method bn disha-dev (version "0.1.0"))
 
 (description "Bengali input method based on probhat layout.
 
