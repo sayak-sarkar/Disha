@@ -14,3 +14,8 @@ File Description:
 bn-disha.mim: Logical implementation for the Visual Based Input System. This file needs a few more corrections to work with join pre-base matras and consonants in a visual way.
 
 bn-disha-dev.mim: Combination mapping based alternate implementation for the Visual Based Input System. This is a functionally complete implementation of the required system. 
+
+Link to Project Blog:
+=====================
+
+www.sayaksarkar.wordpress.com/disha
