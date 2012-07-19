@@ -8,7 +8,6 @@ The non-visual style follows a uniform method of typing the characters as per th
 This method of writing is already prevalent.However, this often poses a learning challenge for new users who are more practised in the conventional visual writing method. 
 This project aims to create a Visual typing method for complex scripts like Bengali.
 
-Link to Project Blog: http://sayaksarkar.wordpress.com/disha
 
 File Description:
 =================
@@ -17,7 +16,10 @@ bn-disha.mim: Logical implementation for the Visual Based Input System. This fil
 
 bn-disha-dev.mim: Combination mapping based alternate implementation for the Visual Based Input System. This is a functionally complete implementation of the required system. 
 
-Link to Project Blog:
+
+Project Links:
 =====================
 
-www.sayaksarkar.wordpress.com/disha
+Project Blog: www.sayaksarkar.wordpress.com/disha
+
+Project Proposal: http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/sayak_sarkar/6001
