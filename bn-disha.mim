@@ -1,5 +1,5 @@
 ;; bn-disha.mim -- Bengali input method for visual input sequence.
-;; Copyright (c) 2012 Sayak Sarkar <sayak.bugsmith@gmail.com>
+;; Copyright (c) 2012 Sayak Sarkar <sayak.bugsmith@gmail.com>.
 
 ;; This file is part of the m17n contrib; a sub-part of the m17n
 ;; library.
