@@ -8,6 +8,8 @@ The non-visual style follows a uniform method of typing the characters as per th
 This method of writing is already prevalent.However, this often poses a learning challenge for new users who are more practised in the conventional visual writing method. 
 This project aims to create a Visual typing method for complex scripts like Bengali.
 
+Link to Project Blog: http://sayaksarkar.wordpress.com/disha
+
 File Description:
 =================
 
