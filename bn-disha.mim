@@ -1,183 +1,204 @@
-;; bn-disha.mim -- Bengali input method with probhat method
+;; bn-disha.mim -- Bengali input method for visual input sequence.
+;; Copyright (c) 2012 Sayak Sarkar <sayak.bugsmith@gmail.com>
 
-(input-method bn disha (version "0.0.2"))
+;; This file is part of the m17n contrib; a sub-part of the m17n
+;; library.
 
-(description "Bengali Visual Input Method based on the Probhat input layout mapping.")
+;; The m17n library is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU Lesser General Public License
+;; as published by the Free Software Foundation; either version 2.1 of
+;; the License, or (at your option) any later version.
+
+;; The m17n library is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; Lesser General Public License for more details.
+
+;; You should have received a copy of the GNU Lesser General Public
+;; License along with the m17n library; if not, write to the Free
+;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+(input-method bn disha-new (version "1.0.0"))
+
+(description "Bengali input method based on probhat layout.
+
+Visual Based Bengali Keymap Layout created by Sayak Sarkar and proposed by Ankur Group (www.ankur.org.in) as part of Google Summer of Code, 2012. 
+
+Link to proposal: http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/sayak_sarkar/6001
+
+Key summary:
+
+To write \"juktakhor\" i.e. conjunct characters of consonants please use the \"halant\" character on the key '/' between the two consonant akshar. 
+
+E.g. ক্ষ = k+/+S
+
+To write two-part vowels please type the pre-base vowel followed by the consonant further followed by the post-base vowel.
+
+E.g. কো = [+k+a
+
+Author: Sayak Sarkar <sayak.bugsmith@gmail.com>
+Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
 (title "কি")
 
 (map
-  (consonant
-	("k","ক")	; 0995
-	("K","খ")	; 0996
-	("g","গ")	; 0997
-	("G","ঘ")	; 0998
-	("c","চ")	; 099A
-	("C","ছ")	; 099B
-	("j","জ")	; 099C
-	("J","ঝ")	; 099D
-	("t","ট")	; 099F
-	("T","ঠ")	; 09A0
-	("d","ড")	; 09A1
-	("D","ঢ")	; 09A2
-	("N"."ণ")	; 09A3
-	("f","ত")	; 09A4
-	("F","থ")	; 09A5
-	("q","দ")	; 09A6
-	("Q","ধ")	; 09A7
-	("n","ন")	; 09A8
-	("p","প")	; 09AA
-	("P","ফ")	; 09AB
-	("b","ব")	; 09AC
-	("B","ভ")	; 09AD
-	("m","ম")	; 09AE
-	("Z","য")	; 09AF
-	("r","র")	; 09B0
-	("l","ল")	; 09B2
-	("x","শ")	; 09B6
-	("S","ষ")	; 09B7
-	("s","স")	; 09B8
-	("h","হ")	; 09B9
-	("R","ড়")	; 09BC
-	("X","ঢ়")	; 09BD
-	("z","য়")	; 09BF
-		("&","ঞ")	; 099E
-		("M","ঙ")	; 0999
-		("*","ৎ")	; 09CE
-   )
+ (consonant
+  ("k","ক")				; 0995
+  ("K","খ")				; 0996
+  ("g","গ")				; 0997
+  ("G","ঘ")				; 0998
+  ("M","ঙ")				; 0999
+  ("c","চ")				; 099A
+  ("C","ছ")				; 099B
+  ("j","জ")				; 099C
+  ("J","ঝ")				; 099D
+  ("&","ঞ")				; 099E
+  ("t","ট")				; 099F
+  ("T","ঠ")				; 09A0
+  ("d","ড")				; 09A1
+  ("D","ঢ")				; 09A2
+  ("N"."ণ")				; 09A3
+  ("f","ত")				; 09A4
+  ("F","থ")				; 09A5
+  ("q","দ")				; 09A6
+  ("Q","ধ")				; 09A7
+  ("n","ন")				; 09A8
+  ("p","প")				; 09AA
+  ("P","ফ")				; 09AB
+  ("b","ব")				; 09AC
+  ("B","ভ")				; 09AD
+  ("m","ম")				; 09AE
+  ("Z","য")				; 09AF
+  ("r","র")				; 09B0
+  ("l","ল")				; 09B2
+  ("x","শ")				; 09B6
+  ("S","ষ")				; 09B7
+  ("s","স")				; 09B8
+  ("h","হ")				; 09B9
+  ("R","ড়")				; 09BC
+  ("X","ঢ়")				; 09BD
+  ("z","য়")				; 09BF
+  ("*","ৎ")				; 09CE
+ )
 
-  (numpad
-	((KP_1) "১")
-	((KP_2) "২")
-	((KP_3) "৩")
-	((KP_4) "৪")
-	((KP_5) "৫")
-	((KP_6) "৬")
-	((KP_7) "৭")
-	((KP_8) "৮")
-	((KP_9) "৯")
-	((KP_0) "০")
-        ((KP_Decimal) ".")
-	((KP_Divide) "/")
-	((KP_Multiply) "*")
-	((KP_Add) "+")
-	((KP_Subtract) "-")
-  )
+ (numpad
+  ((KP_0) "০")                          ; 09E6
+  ((KP_1) "১")                          ; 09E7
+  ((KP_2) "২")                          ; 09E8
+  ((KP_3) "৩")                          ; 09E9
+  ((KP_4) "৪")                          ; 09EA
+  ((KP_5) "৫")                          ; 09EB
+  ((KP_6) "৬")                          ; 09EC
+  ((KP_7) "৭")                          ; 09ED
+  ((KP_8) "৮")                          ; 09EE
+  ((KP_9) "৯")                          ; 09EF
+  ((KP_Decimal) ".")
+  ((KP_Divide) "/")
+  ((KP_Multiply) "*")
+  ((KP_Add) "+")
+  ((KP_Subtract) "-")
+ )
 
-  (number
-	("1" ?১)
-	("2" ?২)
-	("3" ?৩)
-	("4" ?৪)
-	("5" ?৫)
-	("6" ?৬)
-	("7" ?৭)
-	("8" ?৮)
-        ("9" ?৯)
-	("0" ?০)
-  )
+ (number
+  ("0" ?০)                              ; 09E6
+  ("1" ?১)                              ; 09E7
+  ("2" ?২)                              ; 09E8
+  ("3" ?৩)                              ; 09E9
+  ("4" ?৪)                              ; 09EA
+  ("5" ?৫)                              ; 09EB
+  ("6" ?৬)                              ; 09EC
+  ("7" ?৭)                              ; 09ED
+  ("8" ?৮)                              ; 09EE
+  ("9" ?৯)                              ; 09EF
+ )
 
-  (special
-        ("!" ?!)
-	("@" ?@)
-	("#" ?#)
-	("$" ?৳)
-	("%" ?%)
-	("^" ?^)
-	("(" ?()
-	(")" ?))
-	("_" ?_)
-	("-" ?‌)
-	("+" ?‍)
-	("=" ?=)
-	(":" ?:)
-	(";" ?;)
-	("\"" ?\")
-	("'" ?')
-	("|" ?॥)
-	("\\" ?\\)
-	("~" ?~)
-	("`" ?`)
-	("," ?,)
-	("." ?।)
-	("?" ??)
-  )
+ (special
+  ("!" ?!)
+  ("@" ?@)
+  ("#" ?#)
+  ("$" ?৳)
+  ("%" ?%)
+  ("^" ?^)
+  ("(" ?()
+  (")" ?))
+  ("_" ?_)
+  ("-" ?‌)
+  ("+" ?‍)
+  ("=" ?=)
+  (":" ?:)
+  (";" ?\;)
+  ("\"" ?\")
+  ("'" ?')
+  ("|" ?॥)
+  ("\\" ?\\)
+  ("~" ?~)
+  ("`" ?`)
+  ("," ?,)
+  ("." ?।)
+  ("?" ??)
+ )
 
-  (independent
-	("A","অ")	; 0985
-	("v","আ")	; 0986
-	("I","ই")	; 0987
-	("E","ঈ")	; 0988
-	("U","উ")	; 0989
-	("W","ঊ")	; 098A
-	("V","ঋ")	; 098B
-	("y","এ")	; 098F
-	("Y","ঐ")	; 0990
-	("o","ও")	; 0993
-	("O","ঔ")	; 0994
-   )
+ (independent
+  ("A","অ")				; 0985
+  ("v","আ")				; 0986
+  ("I","ই")				; 0987
+  ("E","ঈ")				; 0988
+  ("U","উ")				; 0989
+  ("W","ঊ")				; 098A
+  ("V","ঋ")				; 098B
+  ("y","এ")				; 098F
+  ("Y","ঐ")				; 0990
+  ("o","ও")				; 0993
+  ("O","ঔ")				; 0994
+ )
 
-  (dependent
-	("i","ি")	; 09BF
-	("[","ে")	; 09C7
-	("{"," ৈ")	; 09C8
-	("]","ো")	; 09CB
-	("}","ৌ")	; 09CC
-		("a","া")	; 09BE
-		("e","ী")	; 09C0
-		("u","ু")	 ; 09C1
-		("w","ূ")	 ; 09C2
-		("<"," ৃ")	 ; 09C3
-		("/"," ্")	 ; 09CD
-		(">","ঁ")	 ; 0981
-		("L","ং")	; 0982
-		("H","ঃ")	; 0983
-  )
+ (pre-vowel
+  ("i","ি")				; 09BF
+  ("[","ে")				; 09C7
+  ("{","ৈ")				; 09C8
+ )
+
+ (dependent
+  (">","ঁ")				; 0981
+  ("L","ং")				; 0982
+  ("H","ঃ")				; 0983
+  ("a","া")				; 09BE
+  ("e","ী")				; 09C0
+  ("u","ু")				; 09C1
+  ("w","ূ")				; 09C2
+  ("<","ৃ")				; 09C3
+  ("/","্")				; 09CD
+  ("]","ৗ")				; 09D7
+  ("}","৺")                             ; 09FA
+ )
 )
 
 (state
-  (init
-    (dependent
-      (set c @-1)
-	(cond
-	    ((| (< c 0x0999) (> c 0x999))
-	      (cond
-	        ((| (< c 0x099E) (> c 0x099E))
-		  (cond
-	            ((< c 0x09CE)
-			(cond
-	  		  ((= @-2 0x09BF)				;ি
-				(delete @<)
-				
-				(insert c)))
-			(cond
-			  ((= @-2 0x09C7)				;ে
-				(delete @<)
-				0x09C7
-				(insert c)))
-			(cond
-			  ((= @-2 0x09C8)				;ৈ
-				(delete @<)
-				0x09C8)
-				(insert c))
-			(cond
-			  ((= @-1 0x09D7)				;Au-kar
-				(insert c)
-				0x09D7))
-		))))))
-	(commit))
-  (numpad
-   (commit))
-  (number
-   (commit))
-  (special
-   (commit))
-  (independent
-   (commit))
-  (consonant
-     (commit))
-))
+ (init
+  (consonant)
+  (numpad)
+  (number)
+  (special)
+  (independent)
+  (dependent)
+  (pre-vowel (shift pre-vowel)))
+
+ (pre-vowel
+  (consonant (set c @-1)		; C is the just typed consonat
+	     (set d @-2)		; D is the just typed pre-vowel
+	     (delete @<)		; delete C
+	     (move @-1)			; move to before the pre-vowel
+	     (insert c)			; insert C
+	     (insert d)			; insert D
+	     (move @>)  		; move to the end
+	     (dependent)
+             (commit))))                ; commit 
+
+
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
 ;; End:
+
+
