@@ -192,7 +192,6 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	     (insert c)			; insert C
 	     (insert d)			; insert D
 	     (move @>)  		; move to the end
-	     (dependent)
              (commit))))                ; commit 
 
 
