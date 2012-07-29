@@ -1,5 +1,5 @@
 ;; bn-disha.mim -- Bengali input method for visual input sequence.
-;; Copyright (c) 2012 Sayak Sarkar <sayak.bugsmith@gmail.com>.
+;; Copyright (c) 2012 Sayak Sarkar <sayak.bugsmith@gmail.com>
 
 ;; This file is part of the m17n contrib; a sub-part of the m17n
 ;; library.
@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.1.0"))
+(input-method bn disha (version "1.0.1"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -43,6 +43,40 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 (title "কি")
 
 (map
+ (dependent
+  (">","ঁ")				; 0981
+  ("L","ং")				; 0982
+  ("H","ঃ")				; 0983
+  ("a","া")				; 09BE
+  ("e","ী")				; 09C0
+  ("u","ু")				; 09C1
+  ("w","ূ")				; 09C2
+  ("<","ৃ")				; 09C3
+  ("/","্")				; 09CD
+  ("]","ৗ")				; 09D7
+  ("}","৺")                             ; 09FA
+ )
+
+ (pre-vowel
+  ("i","ি")				; 09BF
+  ("[","ে")				; 09C7
+  ("{","ৈ")				; 09C8
+ )
+
+ (independent
+  ("A","অ")				; 0985
+  ("v","আ")				; 0986
+  ("I","ই")				; 0987
+  ("E","ঈ")				; 0988
+  ("U","উ")				; 0989
+  ("W","ঊ")				; 098A
+  ("V","ঋ")				; 098B
+  ("y","এ")				; 098F
+  ("Y","ঐ")				; 0990
+  ("o","ও")				; 0993
+  ("O","ঔ")				; 0994
+ )
+
  (consonant
   ("k","ক")				; 0995
   ("K","খ")				; 0996
@@ -76,10 +110,10 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("S","ষ")				; 09B7
   ("s","স")				; 09B8
   ("h","হ")				; 09B9
-  ("R","ড়")				; 09BC
-  ("X","ঢ়")				; 09BD
-  ("z","য়")				; 09BF
   ("*","ৎ")				; 09CE
+  ("R","ড়")				; 09DC
+  ("X","ঢ়")				; 09DD
+  ("z","য়")				; 09DF
  )
 
  (numpad
@@ -113,11 +147,38 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("9" ?৯)                              ; 09EF
  )
 
+ (alt-group
+  ((G-9) "ঌ")				; 098C
+  ((G-.) "়")				; 09BC
+  ((G-h) "ঽ")				; 09BD
+  ((G-=) "ৄ")				; 09C4
+  ((G-]) "ো")				; 09CB
+  ((G-}) "ৌ")				; 09CC
+  ((G-+) "ৠ")				; 09E0
+  ((G-0) "ৡ")				; 09E1
+  ((G-l) "ৢ")				; 09E2
+  ((G-L) "ৣ")				; 09E3
+  ((G-r) "‍ৰ")				; 09F0
+  ((G-R) "‌ৱ")				; 09F1
+  ((G-&) "৲")				; 09F2
+  ((G-$) "৳")				; 09F3
+  ((G-!) "৴")				; 09F4
+  ((G-@) "৵")				; 09F5
+  ((G-#) "৶")				; 09F6
+  ((G-%) "৸")				; 09F8
+  ((G-^) "৹")				; 09F9
+  ((G-?) "৻")				; 09FB
+  ((G-/) "্য")
+  ((G-*) "ক্ষ")
+  ((G-8) "জ্ঞ")
+ )
+
  (special
+  ("." ?।)                              ; 09F7
   ("!" ?!)
   ("@" ?@)
   ("#" ?#)
-  ("$" ?৳)
+  ("$" ?₹)                              
   ("%" ?%)
   ("^" ?^)
   ("(" ?()
@@ -135,42 +196,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("~" ?~)
   ("`" ?`)
   ("," ?,)
-  ("." ?।)
   ("?" ??)
- )
-
- (independent
-  ("A","অ")				; 0985
-  ("v","আ")				; 0986
-  ("I","ই")				; 0987
-  ("E","ঈ")				; 0988
-  ("U","উ")				; 0989
-  ("W","ঊ")				; 098A
-  ("V","ঋ")				; 098B
-  ("y","এ")				; 098F
-  ("Y","ঐ")				; 0990
-  ("o","ও")				; 0993
-  ("O","ঔ")				; 0994
- )
-
- (pre-vowel
-  ("i","ি")				; 09BF
-  ("[","ে")				; 09C7
-  ("{","ৈ")				; 09C8
- )
-
- (dependent
-  (">","ঁ")				; 0981
-  ("L","ং")				; 0982
-  ("H","ঃ")				; 0983
-  ("a","া")				; 09BE
-  ("e","ী")				; 09C0
-  ("u","ু")				; 09C1
-  ("w","ূ")				; 09C2
-  ("<","ৃ")				; 09C3
-  ("/","্")				; 09CD
-  ("]","ৗ")				; 09D7
-  ("}","৺")                             ; 09FA
  )
 )
 
@@ -182,6 +208,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (special)
   (independent)
   (dependent)
+  (alt-group)
   (pre-vowel (shift pre-vowel)))
 
  (pre-vowel
