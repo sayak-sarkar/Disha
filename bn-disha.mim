@@ -147,7 +147,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("9" ?৯)                              ; 09EF
  )
 
- (alt-group
+ (AltGr
   ((G-9) "ঌ")				; 098C
   ((G-.) "়")				; 09BC
   ((G-h) "ঽ")				; 09BD
@@ -158,8 +158,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-0) "ৡ")				; 09E1
   ((G-l) "ৢ")				; 09E2
   ((G-L) "ৣ")				; 09E3
-  ((G-r) "‍ৰ")				; 09F0
-  ((G-R) "‌ৱ")				; 09F1
+  ((G-r) "ৰ")				; 09F0
+  ((G-R) "ৱ")				; 09F1
   ((G-&) "৲")				; 09F2
   ((G-$) "৳")				; 09F3
   ((G-!) "৴")				; 09F4
@@ -184,8 +184,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("(" ?()
   (")" ?))
   ("_" ?_)
-  ("-" ?‌)
-  ("+" ?‍)
+  ("-" ?-)
+  ("+" ?+)
   ("=" ?=)
   (":" ?:)
   (";" ?\;)
@@ -208,7 +208,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (special)
   (independent)
   (dependent)
-  (alt-group)
+  (AltGr)
   (pre-vowel (shift pre-vowel)))
 
  (pre-vowel
