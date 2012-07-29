@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.1.1"))
+(input-method bn disha (version "0.2.0"))
 
 (description "Bengali input method based on probhat layout.
 
