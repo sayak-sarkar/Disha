@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.2.0"))
+(input-method bn disha (version "0.3.0"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -47,14 +47,23 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (">","ঁ")				; 0981
   ("L","ং")				; 0982
   ("H","ঃ")				; 0983
-  ("a","া")				; 09BE
   ("e","ী")				; 09C0
   ("u","ু")				; 09C1
   ("w","ূ")				; 09C2
   ("<","ৃ")				; 09C3
-  ("/","্")				; 09CD
-  ("]","ৗ")				; 09D7
   ("}","৺")                             ; 09FA
+ )
+
+ (halant
+  ("/","্")				; 09CD
+ )
+
+ (a-kar
+  ("a","া")				; 09BE
+ )
+
+ (au-kar
+  ("]","ৗ")				; 09D7
  )
 
  (pre-vowel
@@ -147,7 +156,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("9" ?৯)                              ; 09EF
  )
 
- (AltGr
+(AltGr
   ((G-9) "ঌ")				; 098C
   ((G-.) "়")				; 09BC
   ((G-h) "ঽ")				; 09BD
@@ -171,6 +180,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-/) "্য")
   ((G-*) "ক্ষ")
   ((G-8) "জ্ঞ")
+  ((G-|) "")                            ; ZWNJ
  )
 
  (special
@@ -184,15 +194,14 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("(" ?()
   (")" ?))
   ("_" ?_)
-  ("-" ?-)
-  ("+" ?+)
+  ("-" ?‌)
+  ("+" ?‍)
   ("=" ?=)
   (":" ?:)
   (";" ?\;)
   ("\"" ?\")
   ("'" ?')
   ("|" ?॥)
-  ("\\" ?\\)
   ("~" ?~)
   ("`" ?`)
   ("," ?,)
@@ -209,18 +218,42 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (independent)
   (dependent)
   (AltGr)
+  (halant)
+  (a-kar)
+  (au-kar)
   (pre-vowel (shift pre-vowel)))
 
  (pre-vowel
-  (consonant (set c @-1)		; C is the just typed consonat
-	     (set d @-2)		; D is the just typed pre-vowel
-	     (delete @<)		; delete C
-	     (move @-1)			; move to before the pre-vowel
-	     (insert c)			; insert C
-	     (insert d)			; insert D
-	     (move @>)  		; move to the end
-             (commit))))                ; commit 
+  (consonant   (set c @-1)		; C is the just typed consonant
+	       (set d @-2)		; D is the just typed pre-vowel
+	       (delete @<)		; delete C
+	       (move @-1)        	; move to before the first position
+	       (insert c) 		; insert C
+	       (insert d)	        ; insert D
+	       (move @>))               ; move to the end
 
+  (halant      (set h @-1)              ; H is the halant
+	       (delete @-1)             ; delete H
+	       (move @-2)               ; move to before the pre-vowel
+	       (insert h))              ; insert halant
+
+
+  (a-kar       (set f @-3)              ; F is the consonant
+	       (delete @<)              ; clear the input buffer
+	       (move @-1)               ; move to the first position
+	       (insert f)               ; insert F
+	       0x09CB)                  ; insert O-kar
+  ;if previous combination == ে+<consonant>+া replace it with <consonant>+ো
+
+
+ (au-kar       (set f @-3)              ; F is the consonant
+	       (delete @<)              ; clear the input buffer
+	       (move @-1)               ; move to the first position
+	       (insert f)               ; insert F
+	       0x09CC)                  ; insert Au-kar
+  ;if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
+ )
+)
 
 ;; Local Variables:
 ;; coding: utf-8
