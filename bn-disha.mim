@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.4.3"))
+(input-method bn disha (version "0.4.4"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -224,52 +224,51 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (halant)
   (a-kar)
   (au-kar)
-  (backspace (set m @-1)                ; M is the pre-vowel of the previous consonant
+  (backspace (cond                      ; check if the input buffer is currently empty
+	      ((< @-1 0)
+	       (set m 0)))              ; dummy input
+	     (set mark 0)               ; initialize pre-vowel series marker
+
+	     (cond                      ; check for back to back pre-vowel inputs
+	      ((& (| (= @-1 0x09BF) (= @-1 0x09C7) (= @-1 0x09C8))
+		  (| (= @-2 0x09BF) (= @-2 0x09C7) (= @-2 0x09C8)))
+	       (delete @-1)             ; delete preceding pre-vowel
+	       (set mark 1)))           ; set pre-vowel series marker
+
+             (set m @-1)                ; M is the pre-vowel of the previous consonant
 	     (set b @-2)                ; B is the previous consonant
 
-	     (cond                      ; check if the input buffer is currently empty
-	      ((< m 0)
-	       (set m 0)))              ; dummy input
-	     (delete @-1)               ; delete the previous character
-	     
+	      (cond
+	       ((< mark 1)
+	       (delete @-1)))           ; delete the previous character if marker is not set
+
 	     (cond
 	      ((& (= m 0x09BF) (> b 0)) ; check whether M is ি
 	       (delete @-1)             ; delete the previous consonant
-	       (insert m)               ; re-insert the pre-vowel
-	       (move @>)
-	       (delete m)
-	       (shift init)))
+	       (insert m)))             ; re-insert the pre-vowel
 
 	     (cond 
 	      ((& (= m 0x09C7) (> b 0)) ; check whether M is ে
 	       (delete @-1)             ; delete the previous consonant
-	       (insert m)               ; re-insert the pre-vowel
-	       (move @>)
-	       (delete m)
-	       (shift init)))
+	       (insert m)))             ; re-insert the pre-vowel
 
 	     (cond
 	      ((& (= m 0x09C8) (> b 0)) ; check whether M is ৈ
 	       (delete @-1)             ; delete the previous consonant
-	       (insert m)               ; re-insert the pre-vowel
-	       (move @>)
-	       (delete m)
-	       (shift init)))
+	       (insert m)))             ; re-insert the pre-vowel
 
 	     (cond
 	      ((& (= m 0x09CB) (> b 0)) ; check whether M is ো
 	       (delete @-2)             ; delete the previous right-split-vowel
 	       (insert b)               ; re-insert the pre-vowel
-	       (move @>)
-	       (delete b)
-	       0x09C7))                  ; insert ে
+	       (move @>)                ; move to the end
+	       0x09C7))                 ; insert ে
 
 	     (cond
 	      ((& (= m 0x09CC) (> b 0)) ; check whether M is ৌ
 	       (delete @-2)             ; delete the previous right-split-vowel
 	       (insert b)               ; re-insert the pre-vowel
-	       (move @>)
-	       (delete b)
+	       (move @>)                ; move to the end
 	       0x09C8)))                ; insert ে
 
   (pre-vowel (shift pre-vowel)))
@@ -282,7 +281,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (insert c) 		; insert C
 	       (insert d)	        ; insert D
 	       (move @>)                ; move to the end
-	       (shift init))      ; commit the input buffer.
+	       (shift init))            ; shift to init state.
 
   (halant      (set h @-1)              ; H is the halant
 	       (delete @-1)             ; delete H
@@ -291,8 +290,6 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
 
   (a-kar       (cond
-		;((= @-1 0x200C)
-		 ;(delete @-1))
 		((= @-2 0x09C7)
 		 (set f @-3)            ; F is the consonant
 		 (delete @<)            ; clear the input buffer
@@ -304,8 +301,6 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
 
  (au-kar       (cond
-		;((= @-1 0x200C)
-		 ;(delete @-1))
                 ((= @-2 0x09C7)
 		 (set f @-3)            ; F is the consonant
 		 (delete @<)            ; clear the input buffer
