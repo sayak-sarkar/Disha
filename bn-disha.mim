@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.4.0"))
+(input-method bn disha (version "0.4.1"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -42,29 +42,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
 (title "কি")
 
-(macro
- (pre-proc
-  (cond
-   ((= @-1 0x200C)
-    (delete @-1)))
-  (cond
-   ((= @+0 0x200C)
-    (delete @+1)))))
-
 (map
- (starter
-   (">") ("L") ("H") ("a") ("e") ("u") ("w") ("<") ("]") ("}") ("/") ("i") ("[") ("{") ("A")
-   ("v") ("I") ("E") ("U") ("W") ("V") ("y") ("Y") ("o") ("O") ("k") ("K") ("g") ("G") ("M")
-   ("c") ("C") ("j") ("J") ("&") ("t") ("T") ("d") ("D") ("N") ("f") ("F") ("q") ("Q") ("n")
-   ("p") ("P") ("b") ("B") ("m") ("Z") ("r") ("l") ("x") ("S") ("s") ("h") ("*") ("R") ("X")
-   ("z") ("0") ("1") ("2") ("3") ("4") ("5") ("6") ("7") ("8") ("9") (".") ("!") ("@") ("#")
-   ("$") ("%") ("^") ("(") (")") ("_") ("-") ("+") ("=") (":") (";") ("'") ("|") ("~") ("`") 
-   (",") ("?") ("\\") ("\"") ((G-9)) ((G-.)) ((G-h)) ((G-=)) ((G-])) ((G-})) ((G-+)) ((G-0))
-   ((G-l)) ((G-L)) ((G-r)) ((G-R)) ((G-&)) ((G-$)) ((G-!)) ((G-@))  ((G-#)) ((G-%))  ((G-^)) 
-   ((G-?)) ((G-/)) ((G-*)) ((G-8)) ((KP_Add)) ((KP_Subtract)) ((KP_Decimal)) ((KP_Multiply)) 
-   ((KP_Divide))  ((KP_0)) ((KP_1))  ((KP_2)) ((KP_3))  ((KP_4)) ((KP_5))  ((KP_6)) ((KP_7)) 
-   ((KP_8)) ((KP_9)) ((BackSpace)) ((Delete)))
-
  (dependent
   (">","ঁ")				; 0981
   ("L","ং")				; 0982
@@ -216,8 +194,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("(" ?()
   (")" ?))
   ("_" ?_)
-  ("-" ?‌-)
-  ("+" ?‍+)
+  ("-" ?‌)
+  ("+" ?‍)
   ("=" ?=)
   (":" ?:)
   (";" ?\;)
@@ -286,7 +264,9 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (move @-1)        	; move to before the first position
 	       (insert c) 		; insert C
 	       (insert d)	        ; insert D
-	       (move @>))               ; move to the end
+	       (move @>)                ; move to the end
+	       (commit))                ; commit
+	
 
   (halant      (set h @-1)              ; H is the halant
 	       (delete @-1)             ; delete H
@@ -300,7 +280,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		 (delete @<)            ; clear the input buffer
 		 (move @-1)             ; move to the first position
 		 (insert f)             ; insert F
-		 0x09CB)))              ; insert O-kar
+		 0x09CB                 ; insert O-kar
+		 (insert "")))          ; insert ZWNJ
   ;if previous combination == ে+<consonant>+া replace it with <consonant>+ো
 
 
@@ -310,7 +291,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		 (delete @<)            ; clear the input buffer
 		 (move @-1)             ; move to the first position
 		 (insert f)             ; insert F
-		 0x09CC)))              ; insert Au-kar
+		 0x09CC                 ; insert Au-kar
+		 (insert ""))))         ; insert ZWNJ
   ;if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 
  (backspace   (undo)))                  ; Undo previous action
@@ -320,4 +302,5 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 ;; coding: utf-8
 ;; mode: emacs-lisp
 ;; End:
+
 
