@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.4.4"))
+(input-method bn disha (version "0.4.5"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -32,6 +32,8 @@ Key summary:
 To write \"juktakhor\" i.e. conjunct characters of consonants please use the \"halant\" character on the key '/' between the two consonant akshar. 
 
 E.g. ক্ষ = k+/+S
+          র্কি = r+/+i+k
+         ক্তি = k+/+i+f
 
 To write two-part vowels please type the pre-base vowel followed by the consonant further followed by the post-base vowel.
 
@@ -40,7 +42,7 @@ E.g. কো = [+k+a
 Author: Sayak Sarkar <sayak.bugsmith@gmail.com>
 Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
-(title "কি")
+(title "দিশা")
 
 (map
  (dependent
@@ -51,26 +53,19 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("u","ু")				; 09C1
   ("w","ূ")				; 09C2
   ("<","ৃ")				; 09C3
-  ("}","৺")                             ; 09FA
- )
+  ("}","৺"))                             ; 09FA
 
  (halant
-  ("/","্")				; 09CD
- )
+  ("/","্"))				; 09CD
 
  (a-kar
   ("a","া")				; 09BE
- )
-
- (au-kar
-  ("]","ৗ")				; 09D7
- )
+  ("]","ৗ"))				; 09D7
 
  (pre-vowel
   ("i","ি")				; 09BF
   ("[","ে")				; 09C7
-  ("{","ৈ")				; 09C8
- )
+  ("{","ৈ"))				; 09C8
 
  (independent
   ("A","অ")				; 0985
@@ -83,8 +78,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("y","এ")				; 098F
   ("Y","ঐ")				; 0990
   ("o","ও")				; 0993
-  ("O","ঔ")				; 0994
- )
+  ("O","ঔ"))				; 0994
 
  (consonant
   ("k","ক")				; 0995
@@ -122,8 +116,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("*","ৎ")				; 09CE
   ("R","ড়")				; 09DC
   ("X","ঢ়")				; 09DD
-  ("z","য়")				; 09DF
- )
+  ("z","য়"))				; 09DF
 
  (numpad
   ((KP_0) "০")                          ; 09E6
@@ -140,8 +133,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((KP_Divide) "/")
   ((KP_Multiply) "*")
   ((KP_Add) "+")
-  ((KP_Subtract) "-")
- )
+  ((KP_Subtract) "-"))
 
  (number
   ("0" ?০)                              ; 09E6
@@ -153,15 +145,14 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("6" ?৬)                              ; 09EC
   ("7" ?৭)                              ; 09ED
   ("8" ?৮)                              ; 09EE
-  ("9" ?৯)                              ; 09EF
- )
+  ("9" ?৯))                              ; 09EF
 
  (AltGr
   ((G-9) "ঌ")				; 098C
   ((G-.) "়")				; 09BC
   ((G-h) "ঽ")				; 09BD
   ((G-=) "ৄ")				; 09C4
-  ((G-]) "ো")				; 09CB
+  ((G-]) "ো")		        	; 09CB
   ((G-}) "ৌ")				; 09CC
   ((G-+) "ৠ")				; 09E0
   ((G-0) "ৡ")				; 09E1
@@ -180,8 +171,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-/) "্য")
   ((G-*) "ক্ষ")
   ((G-8) "জ্ঞ")
-  ((G-|) "")                            ; ZWNJ
- )
+  ((G-|) ""))                           ; ZWNJ
 
  (special
   ("." ?।)                              ; 09F7
@@ -205,12 +195,9 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("~" ?~)
   ("`" ?`)
   ("," ?,)
-  ("?" ??)
- )
+  ("?" ??))
 
- (backspace ((BackSpace)))
-
-)
+ (backspace ((BackSpace))))
 
 (state
  (init
@@ -223,98 +210,84 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (AltGr)
   (halant)
   (a-kar)
-  (au-kar)
-  (backspace (cond                      ; check if the input buffer is currently empty
-	      ((< @-1 0)
-	       (set m 0)))              ; dummy input
-	     (set mark 0)               ; initialize pre-vowel series marker
 
-	     (cond                      ; check for back to back pre-vowel inputs
-	      ((& (| (= @-1 0x09BF) (= @-1 0x09C7) (= @-1 0x09C8))
-		  (| (= @-2 0x09BF) (= @-2 0x09C7) (= @-2 0x09C8)))
-	       (delete @-1)             ; delete preceding pre-vowel
-	       (set mark 1)))           ; set pre-vowel series marker
-
-             (set m @-1)                ; M is the pre-vowel of the previous consonant
-	     (set b @-2)                ; B is the previous consonant
-
-	      (cond
-	       ((< mark 1)
-	       (delete @-1)))           ; delete the previous character if marker is not set
-
+  (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
+	     (set b @-2)                ; B is the previous consonant (possibly consonant)
+	     (cond                      ; check if the input buffer is currently empty
+	      ((< m 0)
+	       (set m 0)))              ; dummy input to do nothing
+	     (delete @-1)               ; delete the previous character
 	     (cond
 	      ((& (= m 0x09BF) (> b 0)) ; check whether M is ি
-	       (delete @-1)             ; delete the previous consonant
-	       (insert m)))             ; re-insert the pre-vowel
-
-	     (cond 
+	       (delete @-1))            ; delete the previous consonant
 	      ((& (= m 0x09C7) (> b 0)) ; check whether M is ে
-	       (delete @-1)             ; delete the previous consonant
-	       (insert m)))             ; re-insert the pre-vowel
-
-	     (cond
+	       (delete @-1))            ; delete the previous consonant
 	      ((& (= m 0x09C8) (> b 0)) ; check whether M is ৈ
-	       (delete @-1)             ; delete the previous consonant
-	       (insert m)))             ; re-insert the pre-vowel
-
-	     (cond
-	      ((& (= m 0x09CB) (> b 0)) ; check whether M is ো
-	       (delete @-2)             ; delete the previous right-split-vowel
-	       (insert b)               ; re-insert the pre-vowel
-	       (move @>)                ; move to the end
-	       0x09C7))                 ; insert ে
-
-	     (cond
-	      ((& (= m 0x09CC) (> b 0)) ; check whether M is ৌ
-	       (delete @-2)             ; delete the previous right-split-vowel
-	       (insert b)               ; re-insert the pre-vowel
-	       (move @>)                ; move to the end
-	       0x09C8)))                ; insert ে
+	       (delete @-1))            ; delete the previous consonant
+	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
+					; check whether M is ো / ৌ
+	       0x09C7                   ; insert ে
+	       (commit))))
 
   (pre-vowel (shift pre-vowel)))
 
- (pre-vowel
-  (consonant   (set c @-1)		; C is the just typed consonant
-	       (set d @-2)		; D is the just typed pre-vowel
-	       (delete @<)		; delete C
-	       (move @-1)        	; move to before the first position
-	       (insert c) 		; insert C
-	       (insert d)	        ; insert D
-	       (move @>))               ; move to the end
 
-  (halant      (set h @-1)              ; H is the halant
-	       (delete @-1)             ; delete H
-	       (move @-2)               ; move to before the pre-vowel
-	       (insert h))              ; insert halant
+ (pre-vowel  
+  (consonant (set c @-1)		; C is the just typed consonant
+	     (delete @-1)		; delete the consonant
+	     (move @-1)        	        ; move to before the pre-vowel
+	     (insert c) 		; re-insert the consonant
+	     (move @>)                  ; move to the end
+	     (commit))                  ; commit
 
-  (a-kar       (cond
-		((= @-2 0x09C7)
-		 (set f @-3)            ; F is the consonant
-		 (delete @<)            ; clear the input buffer
-		 (move @-1)             ; move to the first position
-		 (insert f)             ; insert F
-		 0x09CB                 ; insert O-kar
-		 (insert ""))))          ; insert ZWNJ
+
+  (halant    (set h @-1)                ; H is the halant
+	     (delete @-1)               ; delete halant
+	     (move @-2)                 ; move to before the pre-vowel
+	     (insert h))                ; insert halant
+
+  
+  (a-kar     (cond
+	      ((> @-3 -1)
+	       (set f @-3)              ; F is the consonant
+	       (set s @-1)              ; S stores া / ৗ
+	       (delete @-1)             ; delete া / ৗ
+	       (delete @-2)             ; delete ে
+	       (insert f)               ; re-insert the consonant
+	       (cond
+		((= s 0x09BE)
+		 0x09CB)                ; insert ো
+		((= s 0x09D7)
+		 0x09CC))               ; insert ৌ
+	       (commit))))              ; commit
   ;if previous combination == ে+<consonant>+া replace it with <consonant>+ো
-
-
- (au-kar       (cond
-                ((= @-2 0x09C7)
-		 (set f @-3)            ; F is the consonant
-		 (delete @<)            ; clear the input buffer
-		 (move @-1)             ; move to the first position
-		 (insert f)             ; insert F
-		 0x09CC                 ; insert Au-kar
-		 (insert ""))))         ; insert ZWNJ
   ;if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 
 
- (backspace   (undo)))                  ; Undo previous action
-)
+  (backspace (set m @-1)                ; M is the pre-vowel of the previous consonant
+	     (set b @-2)                ; B is the previous consonant
+
+	     (cond                      ; check if the input buffer is currently empty
+	      ((< m 0)
+	       (set m 0)))              ; dummy input
+	     (delete @-1)               ; delete the previous character
+
+	     (cond
+	      ((& (= m 0x09BF) (> b 0)) ; check whether M is ি
+	       (delete @-1))            ; delete the previous consonant
+
+	      ((& (= m 0x09C7) (> b 0)) ; check whether M is ে
+	       (delete @-1))            ; delete the previous consonant
+
+	      ((& (= m 0x09C8) (> b 0)) ; check whether M is ৈ
+	       (delete @-1))            ; delete the previous consonant
+
+	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
+					; check whether M is ো / ৌ
+	       0x09C7                   ; insert ে
+	       (commit)))))
 
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
 ;; End:
-
-
