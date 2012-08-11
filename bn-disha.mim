@@ -148,14 +148,14 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("9" ?৯))                              ; 09EF
 
  (AltGr
-  ((G-() "ঌ")				; 098C
+  ((G-\() "ঌ")				; 098C
   ((G-;) "়")				; 09BC
   ((G-h) "ঽ")				; 09BD
   ((G-=) "ৄ")				; 09C4
   ((G-') "ো")		        	; 09CB
-  ((G-") "ৌ")				; 09CC
+  ((G-\") "ৌ")				; 09CC
   ((G-+) "ৠ")				; 09E0
-  ((G-)) "ৡ")				; 09E1
+  ((G-\)) "ৡ")				; 09E1
   ((G-l) "ৢ")				; 09E2
   ((G-k) "ৣ")				; 09E3
   ((G-r) "ৰ")				; 09F0
@@ -171,7 +171,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-z) "্য")
   ((G-s) "ক্ষ")
   ((G-g) "জ্ঞ")
-  ((G-\) ""))                           ; ZWNJ
+  ((G-\\) ""))                           ; ZWNJ
 
  (special
   ("." ?।)                              ; 09F7
