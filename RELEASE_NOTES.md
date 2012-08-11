@@ -51,7 +51,7 @@ Mapping issue for the character N resolved.
 Version 0.3.0
 =============
 
-ং npost-base joint rendering isssue solved by added mini-states for a-kar and au-kar under pre-vowel states to replace split combination of ে+া/ৗ with ো/ৌ.
+ং Post-Base Join Rendering Isssue solved by added mini-states for a-kar and au-kar under pre-vowel states to replace split combination of ে+া/ৗ with ো/ৌ.
 
 Created new mini-state halant to identify pre-vowel + consonant + halant + consonant sequences.
 
