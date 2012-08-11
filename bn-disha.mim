@@ -218,12 +218,10 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (set m 0)))              ; dummy input to do nothing
 	     (delete @-1)               ; delete the previous character
 	     (cond
-	      ((& (= m 0x09BF) (> b 0)) ; check whether M is ি
+	      ((& (| (= m 0x09BF) (= m 0x09C7) (= m 0x09C8)) (> b 0)) 
+					; check whether M is a pre-vowel
 	       (delete @-1))            ; delete the previous consonant
-	      ((& (= m 0x09C7) (> b 0)) ; check whether M is ে
-	       (delete @-1))            ; delete the previous consonant
-	      ((& (= m 0x09C8) (> b 0)) ; check whether M is ৈ
-	       (delete @-1))            ; delete the previous consonant
+
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
 					; check whether M is ো / ৌ
 	       0x09C7                   ; insert ে
@@ -264,22 +262,15 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ;if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 
 
-  (backspace (set m @-1)                ; M is the pre-vowel of the previous consonant
-	     (set b @-2)                ; B is the previous consonant
-
+  (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
+	     (set b @-2)                ; B is the previous consonant (possibly consonant)
 	     (cond                      ; check if the input buffer is currently empty
 	      ((< m 0)
-	       (set m 0)))              ; dummy input
+	       (set m 0)))              ; dummy input to do nothing
 	     (delete @-1)               ; delete the previous character
-
 	     (cond
-	      ((& (= m 0x09BF) (> b 0)) ; check whether M is ি
-	       (delete @-1))            ; delete the previous consonant
-
-	      ((& (= m 0x09C7) (> b 0)) ; check whether M is ে
-	       (delete @-1))            ; delete the previous consonant
-
-	      ((& (= m 0x09C8) (> b 0)) ; check whether M is ৈ
+	      ((& (| (= m 0x09BF) (= m 0x09C7) (= m 0x09C8)) (> b 0)) 
+					; check whether M is a pre-vowel
 	       (delete @-1))            ; delete the previous consonant
 
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
