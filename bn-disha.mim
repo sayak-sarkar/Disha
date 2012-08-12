@@ -53,7 +53,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("u","ু")				; 09C1
   ("w","ূ")				; 09C2
   ("<","ৃ")				; 09C3
-  ("}","৺"))                             ; 09FA
+  ("}","৺"))                            ; 09FA
 
  (halant
   ("/","্"))				; 09CD
@@ -145,15 +145,15 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ("6" ?৬)                              ; 09EC
   ("7" ?৭)                              ; 09ED
   ("8" ?৮)                              ; 09EE
-  ("9" ?৯))                              ; 09EF
+  ("9" ?৯))                             ; 09EF
 
  (AltGr
   ((G-\() "ঌ")				; 098C
-  ((G-;) "়")				; 09BC
+  ((G-\;) "়")				; 09BC
   ((G-h) "ঽ")				; 09BD
   ((G-=) "ৄ")				; 09C4
   ((G-') "ো")		        	; 09CB
-  ((G-\") "ৌ")				; 09CC
+  ((G-\") "ৌ")			; 09CC
   ((G-+) "ৠ")				; 09E0
   ((G-\)) "ৡ")				; 09E1
   ((G-l) "ৢ")				; 09E2
@@ -171,7 +171,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-z) "্য")
   ((G-s) "ক্ষ")
   ((G-g) "জ্ঞ")
-  ((G-\\) ""))                           ; ZWNJ
+  ((G-f) "ক্ত")
+  ((G-\\) ""))                          ; ZWNJ
 
  (special
   ("." ?।)                              ; 09F7
@@ -253,13 +254,13 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (delete @-2)             ; delete ে
 	       (insert f)               ; re-insert the consonant
 	       (cond
-		((= s 0x09BE)
+		((= s 0x09BE)		; if previous combination == ে+<consonant>+া replace it with <consonant>+ো
 		 0x09CB)                ; insert ো
-		((= s 0x09D7)
+		((= s 0x09D7)           ; if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 		 0x09CC))               ; insert ৌ
 	       (commit))))              ; commit
-  ;if previous combination == ে+<consonant>+া replace it with <consonant>+ো
-  ;if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
+  
+
 
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
