@@ -11,6 +11,8 @@ Reduced logical complexity.
 
 Updated Split-Vowel implementation logic.
 
+Created new AltGr Mapping for ক্ত.
+
 
 Version 0.4.4
 =============

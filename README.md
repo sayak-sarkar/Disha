@@ -12,7 +12,7 @@ This project aims to create a Visual typing method for complex scripts like Beng
 File Description:
 =================
 
-bn-disha.mim: Logical implementation for the Visual Based Input System. This file needs a few more corrections to improve the split-vowel input sequence.
+bn-disha.mim: Logical implementation for the Visual Based Input System. This file contains the actual working code for the system.
 
 
 Project Links:
