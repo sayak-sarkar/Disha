@@ -153,7 +153,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-h) "ঽ")				; 09BD
   ((G-=) "ৄ")				; 09C4
   ((G-') "ো")		        	; 09CB
-  ((G-\") "ৌ")		        ; 09CC
+  ((G-\") "ৌ")		               ;  09CC
   ((G-+) "ৠ")				; 09E0
   ((G-\)) "ৡ")				; 09E1
   ((G-l) "ৢ")				; 09E2
