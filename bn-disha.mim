@@ -247,7 +247,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
   
   (a-kar     (cond
-	      ((> @-3 -1)
+	      ((& (> @-3 -1) (= @-2 0x09C7))
 	       (set f @-3)              ; F is the consonant
 	       (set s @-1)              ; S stores া / ৗ
 	       (delete @-1)             ; delete া / ৗ
@@ -258,10 +258,9 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		 0x09CB)                ; insert ো
 		((= s 0x09D7)           ; if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 		 0x09CC))               ; insert ৌ
-	       (commit))))              ; commit
+	       (commit)))               ; commit
+	     (commit)                   ; commit and exit if it is not a valid sequence
   
-
-
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
 	     (set b @-2)                ; B is the previous consonant (possibly consonant)
