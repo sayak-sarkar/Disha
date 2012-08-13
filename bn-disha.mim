@@ -21,7 +21,7 @@
 
 (input-method bn disha (version "0.4.5"))
 
-(description "Bengali input method based on probhat layout.
+(description "Bengali input method based on Visual Keymap available at: https://raw.github.com/sayak-sarkar/Disha/master/layout/Disha_Bengali.png
 
 Visual Based Bengali Keymap Layout created by Sayak Sarkar and proposed by Ankur Group (www.ankur.org.in) as part of Google Summer of Code, 2012. 
 
@@ -32,8 +32,8 @@ Key summary:
 To write \"juktakhor\" i.e. conjunct characters of consonants please use the \"halant\" character on the key '/' between the two consonant akshar. 
 
 E.g. ক্ষ = k+/+S
-          র্কি = r+/+i+k
-         ক্তি = k+/+i+f
+     র্কি = r+/+i+k
+     ক্তি = k+/+i+f
 
 To write two-part vowels please type the pre-base vowel followed by the consonant further followed by the post-base vowel.
 
