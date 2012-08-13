@@ -22,3 +22,5 @@ Project Links:
 Project Blog: www.sayaksarkar.wordpress.com/disha
 
 Project Proposal: http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/sayak_sarkar/6001
+
+Project Wiki: https://github.com/sayak-sarkar/Disha/wiki
