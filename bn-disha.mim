@@ -210,7 +210,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (dependent)
   (AltGr)
   (halant)
-  (a-kar)
+  (a-kar )
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
 	     (set b @-2)                ; B is the previous consonant (possibly consonant)
@@ -259,7 +259,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		((= s 0x09D7)           ; if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 		 0x09CC))               ; insert ৌ
 	       (commit)))               ; commit
-	     (commit)                   ; commit and exit if it is not a valid sequence
+	     (commit))                  ; commit and exit if it is not a valid sequence
   
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
