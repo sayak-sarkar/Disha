@@ -233,13 +233,24 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
 
  (pre-vowel  
-  (consonant (set c @-1)		; C is the just typed consonant
-	     (delete @-1)		; delete the consonant
-	     (move @-1)        	        ; move to before the pre-vowel
-	     (insert c) 		; re-insert the consonant
-	     (move @>)                  ; move to the end
-	     (set flag 0)
-	     (commit))                  ; commit
+  (consonant (cond
+	      ((= @-2 0x09CD)
+	       (set n @-1)
+	       (set m @-2)
+	       (set p @-3)
+	       (delete @-3)
+	       (insert m)
+	       (insert n)
+	       (insert p)
+	       (commit))
+	      ((!= @-2 0x09CD)
+	       (set c @-1)		; C is the just typed consonant
+	       (delete @-1)		; delete the consonant
+	       (move @-1)        	        ; move to before the pre-vowel
+	       (insert c) 		; re-insert the consonant
+	       (move @>)                  ; move to the end
+	       (set flag 0)
+	       (commit))))                  ; commit
 
 
   (halant    (set h @-1)                ; H is the halant
