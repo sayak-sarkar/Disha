@@ -21,7 +21,7 @@
 
 (input-method bn disha (version "0.4.5"))
 
-(description "Bengali input method based on Visual Keymap available at: https://raw.github.com/sayak-sarkar/Disha/master/layout/Disha_Bengali.png
+(description "Bengali input method based on probhat layout.
 
 Visual Based Bengali Keymap Layout created by Sayak Sarkar and proposed by Ankur Group (www.ankur.org.in) as part of Google Summer of Code, 2012. 
 
@@ -32,8 +32,8 @@ Key summary:
 To write \"juktakhor\" i.e. conjunct characters of consonants please use the \"halant\" character on the key '/' between the two consonant akshar. 
 
 E.g. ক্ষ = k+/+S
-     র্কি = r+/+i+k
-     ক্তি = k+/+i+f
+          র্কি = r+/+i+k
+         ক্তি = k+/+i+f
 
 To write two-part vowels please type the pre-base vowel followed by the consonant further followed by the post-base vowel.
 
@@ -210,7 +210,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (dependent)
   (AltGr)
   (halant)
-  (a-kar )
+  (a-kar)
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
 	     (set b @-2)                ; B is the previous consonant (possibly consonant)
@@ -229,7 +229,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (commit))))
 
   (pre-vowel (set flag 1)
-             (shift pre-vowel)))
+	     (shift pre-vowel)))
 
 
  (pre-vowel  
@@ -261,7 +261,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		((= s 0x09D7)           ; if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 		 0x09CC))               ; insert ৌ
 	       (commit)))               ; commit
-	     (commit))                  ; commit and exit if it is not a valid sequence
+	     (commit))                   ; commit and exit if it is not a valid sequence
   
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
@@ -275,15 +275,13 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 					; check whether M is a pre-vowel
 	       (cond
 		((= flag 0)
-		 (delete @-1)           ; delete the previous consonant
-		 (set flag 0)))
-
+		 (delete @-1))))            ; delete the previous consonant
 
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
 					; check whether M is ো / ৌ
 	       0x09C7                   ; insert ে
-	       (commit))))
-	     (set flag 0))
+	       (commit)))
+	     (set flag 0))))
 
 ;; Local Variables:
 ;; coding: utf-8
