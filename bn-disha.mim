@@ -168,11 +168,17 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   ((G-%) "৸")				; 09F8
   ((G-^) "৹")				; 09F9
   ((G-?) "৻")				; 09FB
+  ((G-\\) ""))                          ; ZWNJ
+
+ (jo-fala
   ((G-z) "্য")
+ )
+
+ (conjoint
   ((G-s) "ক্ষ")
   ((G-g) "জ্ঞ")
   ((G-f) "ক্ত")
-  ((G-\\) ""))                          ; ZWNJ
+ )
 
  (special
   ("." ?।)                              ; 09F7
@@ -210,6 +216,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
   (dependent)
   (AltGr)
   (halant)
+  (conjoint)
+  (jo-fala)
   (a-kar)
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
@@ -228,35 +236,51 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       0x09C7                   ; insert ে
 	       (commit))))
 
-  (pre-vowel (set flag 1)
+  (pre-vowel (set flag 1)               ; set the pre-vowel flag to indicate that the pre-vowel is has not yet beenprocessed
 	     (shift pre-vowel)))
 
 
  (pre-vowel  
   (consonant (cond
-	      ((= @-2 0x09CD)
-	       (set n @-1)
-	       (set m @-2)
-	       (set p @-3)
-	       (delete @-3)
-	       (insert m)
-	       (insert n)
-	       (insert p)
-	       (commit))
+	      ((= @-2 0x09CD)           ; check if the second last character is a halant.
+	       (set n @-1)              ; N is the just typed consonant
+	       (set m @-2)              ; M is the halant
+	       (set p @-3)              ; P is the pre-vowel
+	       (delete @-3)             ; delete the last three characters
+	       (insert m)               ; insert the halant
+	       (insert n)               ; insert the last consonant
+	       (insert p)               ; insert the pre-vowel
+	       (commit))                ; commit the combination sequence join
+
 	      ((!= @-2 0x09CD)
 	       (set c @-1)		; C is the just typed consonant
 	       (delete @-1)		; delete the consonant
-	       (move @-1)        	        ; move to before the pre-vowel
+	       (move @-1)        	; move to before the pre-vowel
 	       (insert c) 		; re-insert the consonant
-	       (move @>)                  ; move to the end
-	       (set flag 0)
-	       (commit))))                  ; commit
+	       (move @>)                ; move to the end
+	       (set flag 0)             ; reset the flag to indicate that the pre-vowel has been processed.
+	       (commit))))              ; commit the processed pre-vowel consonant join
 
+  (jo-fala   (set j @-1)
+	     (set k @-2)
+	     (set l @-3)
+	     (delete @-3)
+	     (insert k)
+	     (insert j)
+	     (insert l)
+	     (commit))
+
+  (conjoint  (move @-3)
+	     (set pre @+0)
+	     (delete @+1)
+	     (move @>)
+	     (insert pre)
+	     (commit))
 
   (halant    (set h @-1)                ; H is the halant
-	     (delete @-1)               ; delete halant
+	     (delete @-1)               ; delete the halant
 	     (move @-2)                 ; move to before the pre-vowel
-	     (insert h))                ; insert halant
+	     (insert h))                ; insert the halant before the pre-vowel
 
   
   (a-kar     (cond
@@ -271,8 +295,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 		 0x09CB)                ; insert ো
 		((= s 0x09D7)           ; if previous combination == ে+<consonant>+ৗ replace it with <consonant>+ৌ
 		 0x09CC))               ; insert ৌ
-	       (commit)))               ; commit
-	     (commit))                   ; commit and exit if it is not a valid sequence
+	       (commit)))               ; commit the the split vowel join
+	     (commit))                  ; commit and exit if it is not a valid sequence
   
 
   (backspace (set m @-1)                ; M is the previous character (possibly pre-vowel)
@@ -285,14 +309,14 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	      ((& (| (= m 0x09BF) (= m 0x09C7) (= m 0x09C8)) (> b 0)) 
 					; check whether M is a pre-vowel
 	       (cond
-		((= flag 0)
-		 (delete @-1))))            ; delete the previous consonant
+		((= flag 0)             ; check if the pre-vowel has been processed
+		 (delete @-1))))        ; delete the previous consonant
 
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
 					; check whether M is ো / ৌ
 	       0x09C7                   ; insert ে
-	       (commit)))
-	     (set flag 0))))
+	       (commit)))               ; commit the split vowel break
+	     (set flag 0))))            ; reset the pre-vowel flag
 
 ;; Local Variables:
 ;; coding: utf-8
