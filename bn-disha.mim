@@ -261,21 +261,21 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (set flag 0)             ; reset the flag to indicate that the pre-vowel has been processed.
 	       (commit))))              ; commit the processed pre-vowel consonant join
 
-  (jo-fala   (set j @-1)
-	     (set k @-2)
-	     (set l @-3)
-	     (delete @-3)
-	     (insert k)
-	     (insert j)
-	     (insert l)
-	     (commit))
+  (jo-fala   (set j @-1)                ; J is 09AF i.e. য
+	     (set k @-2)                ; K is the halant
+	     (set l @-3)                ; L is the pre-vowel
+	     (delete @-3)               ; delete the last three characters
+	     (insert k)                 ; insert the halant
+	     (insert j)                 ; insert 09AF i.e. য
+	     (insert l)                 ; insert the pre-vowel
+	     (commit))                  ; commit the jo-fala joint.
 
-  (conjoint  (move @-3)
-	     (set pre @+0)
-	     (delete @+1)
-	     (move @>)
-	     (insert pre)
-	     (commit))
+  (conjoint  (move @-3)                 ; move to before the pre-vowel
+	     (set pre @+0)              ; Pre is the pre-vowel
+	     (delete @+1)               ; delete the pre-vowel
+	     (move @>)                  ; move to the last position
+	     (insert pre)               ; insert the pre-vowel
+	     (commit))                  ; commit the pre-vowel and conjoint characters joint
 
   (halant    (set h @-1)                ; H is the halant
 	     (delete @-1)               ; delete the halant
