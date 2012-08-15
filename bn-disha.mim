@@ -242,7 +242,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
  (pre-vowel  
   (consonant (cond
-	      ((= @-2 0x09CD)           ; check if the second last character is a halant.
+	      ((& (= @-2 0x09CD) (| (= @-3 0x09BF) (= @-3 0x09C7) (= @-3 0x09C8)))
+					; check if the second last character is a halant and the third last character is a pre-vowel
 	       (set n @-1)              ; N is the just typed consonant
 	       (set m @-2)              ; M is the halant
 	       (set p @-3)              ; P is the pre-vowel
@@ -250,7 +251,8 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       (insert m)               ; insert the halant
 	       (insert n)               ; insert the last consonant
 	       (insert p)               ; insert the pre-vowel
-	       (commit))                ; commit the combination sequence join
+	       (commit)                 ; commit the combination sequence join
+	       (shift init))            ; shift to the init state
 
 	      ((!= @-2 0x09CD)
 	       (set c @-1)		; C is the just typed consonant
@@ -277,10 +279,12 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	     (insert pre)               ; insert the pre-vowel
 	     (commit))                  ; commit the pre-vowel and conjoint characters joint
 
-  (halant    (set h @-1)                ; H is the halant
-	     (delete @-1)               ; delete the halant
-	     (move @-2)                 ; move to before the pre-vowel
-	     (insert h))                ; insert the halant before the pre-vowel
+  (halant    (cond
+	      ((| (= @-2 0x09BF) (= @-2 0x09C7) (= @-2 0x09C8))
+	       (set h @-1)                ; H is the halant
+	       (delete @-1)               ; delete the halant
+	       (move @-2)                 ; move to before the pre-vowel
+	       (insert h))))              ; insert the halant before the pre-vowel
 
   
   (a-kar     (cond
