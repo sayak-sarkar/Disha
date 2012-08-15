@@ -229,7 +229,11 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	     (cond
 	      ((& (| (= m 0x09BF) (= m 0x09C7) (= m 0x09C8)) (> b 0)) 
 					; check whether M is a pre-vowel
-	       (delete @-1))            ; delete the previous consonant
+	       (delete @-1)             ; delete the previous consonant
+	       (cond
+		((= @-1 0x09CD)         ; check if the previous character is a halant, i.e. if the previous characters were conjoint
+		 (delete @-2))))        ; delete halant as well as the previous consonant
+	      
 
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
 					; check whether M is ো / ৌ
@@ -314,7 +318,10 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 					; check whether M is a pre-vowel
 	       (cond
 		((= flag 0)             ; check if the pre-vowel has been processed
-		 (delete @-1))))        ; delete the previous consonant
+		 (delete @-1)           ; delete the previous consonant
+		 (cond
+		  ((= @-1 0x09CD)       ; check if the previous character is a halant, i.e. if the previous characters were conjoint
+		   (delete @-2))))))    ; delete halant as well as the previous consonant
 
 	      ((& (| (= m 0x09CB) (= m 0x09CC)) (> b 0)) 
 					; check whether M is ো / ৌ
