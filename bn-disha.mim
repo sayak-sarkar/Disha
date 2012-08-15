@@ -19,7 +19,7 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "0.4.5"))
+(input-method bn disha (version "0.4.6"))
 
 (description "Bengali input method based on probhat layout.
 
@@ -285,10 +285,10 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 
   (halant    (cond
 	      ((| (= @-2 0x09BF) (= @-2 0x09C7) (= @-2 0x09C8))
-	       (set h @-1)                ; H is the halant
-	       (delete @-1)               ; delete the halant
-	       (move @-2)                 ; move to before the pre-vowel
-	       (insert h))))              ; insert the halant before the pre-vowel
+	       (set h @-1)              ; H is the halant
+	       (delete @-1)             ; delete the halant
+	       (move @-2)               ; move to before the pre-vowel
+	       (insert h))))            ; insert the halant before the pre-vowel
 
   
   (a-kar     (cond
