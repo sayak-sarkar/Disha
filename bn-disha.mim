@@ -230,7 +230,7 @@ Mentor: Runa Bhattacharjee <runabh@gmail.com>")
 	       0x09C7                   ; insert ে
 	       (commit))))
 
-  (pre-vowel (set flag 1)               ; set the pre-vowel flag to indicate that the pre-vowel is has not yet beenprocessed
+  (pre-vowel (set flag 1)               ; set the pre-vowel flag to indicate that the pre-vowel is has not yet been processed
 	     (shift pre-vowel)))
 
  (pre-vowel  
