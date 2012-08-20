@@ -13,7 +13,17 @@ This project aims to create a Visual typing method for complex scripts like Beng
 File Description:
 -----------------
 
-bn-disha.mim: Logical implementation for the Visual Based Input System. This file contains the actual working code for the system.
+* **icon/bn-disha.png:** PNG file containing the icon for the input system.
+
+* **layout/Disha_Bengali.png:** PNG file containing the keyboard layout map for the input system.
+
+* **Conjunct Input Manual.pdf:** PDF file containing reference information for Conjunct Character inputs.
+
+* **README.md:** MD file containing basic information about the input system along with reference links pertaining to the project.
+
+* **Release Notes.md:** MD file containing version information related to the project. This file lists out all major updates to the input system on a release by release basis.
+
+* **bn-disha.mim:** MIM file containing the logical implementation for the Visual Based Input System. This file contains the actual working code for the system.
 
 
 Project Links:
