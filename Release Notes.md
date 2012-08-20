@@ -1,3 +1,8 @@
+Version 1.0.0
+=============
+
+First Major Version Of BN-DISHA Released On The 20th Day Of August 2012.
+
 Version 0.4.6
 =============
 
