@@ -1,3 +1,22 @@
+Version 0.4.6
+=============
+
+Fixed Logical Bug with A-kar state.
+
+Updated System Icon.
+
+Special Symbol Joins Fixed.
+
+Conjoined Character Mappings Removed.
+
+Half Pre-Vowel entry issue Resolved.
+
+Combinational Character issue Resolved.
+
+Backspacing Issue for Conjoined Characters Resolved.
+
+Init State for Halant Updated.
+
 Version 0.4.5
 =============
 
