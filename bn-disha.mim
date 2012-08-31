@@ -19,13 +19,15 @@
 ;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(input-method bn disha (version "1.0.0"))
+(input-method bn disha (version "1.6.1"))
 
 (description "Bengali input method based on probhat layout.
 
 Visual Based Bengali Keymap Layout created by Sayak Sarkar and proposed by Ankur Group (www.ankur.org.in) as part of Google Summer of Code, 2012. 
 
-Link to proposal: http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/sayak_sarkar/6001
+Link to Project Page: http://sayak-sarkar.github.com/Disha/
+
+Link to Proposal: http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/sayak_sarkar/6001
 
 Key summary:
 
